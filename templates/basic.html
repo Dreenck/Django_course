@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    {% block css_files %}
+
+    {% endblock %}
+    <title>
+      {% block title_name %}
+
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header id="main-navigation">
+      <h1><a href="{% url "index-page" %}">My Simple Blog</a></h1>
+      <nav>
+        <a href="{% url "read-later" %}">Stored Posts</a>
+        <a href="{% url "posts-page" %}">All Posts</a>
+      </nav>
+    </header>
+    {% block content %}
+
+    {% endblock %}
+  </body>
+</html>
