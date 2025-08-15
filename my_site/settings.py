@@ -6,9 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True#os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = [os.environ.get("RENDER_EXTERNAL_HOSTNAME", "localhost")]
+ALLOWED_HOSTS = ['localhost']#[os.environ.get("RENDER_EXTERNAL_HOSTNAME", "localhost")]
 
 INSTALLED_APPS = [
     'blog',
