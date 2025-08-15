@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-from os import getenv
+import os
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,14 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getenv("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv("IS_DEVELOPMENT", "True").lower() in ("true", "1", "yes")
+DEBUG = os.environ.get('IS_DEVELOPMENT', 'True') == 'True'
 
-ALLOWED_HOSTS = [
-    getenv("APP_HOST")
-]
+ALLOWED_HOSTS = [os.environ.get("APP_HOST", "localhost")]
+
 
 
 # Application definition
@@ -83,7 +82,7 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default= getenv("DATABASE_URL"))
+    'default': dj_database_url.config(default= os.environ.get("DATABASE_URL"))
 }
 
 
@@ -123,11 +122,7 @@ USE_TZ = True
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': getenv('CLOUDINARY_API_SECRET'),
-}
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = 'static/'
